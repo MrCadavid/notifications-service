@@ -8,7 +8,7 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/topic/notifications', ({body:notification}) => {
 
         console.log(notification)
-        //showNotification(notification);
+        showNotification(notification);
     });
 };
 
@@ -56,7 +56,8 @@ function sendNotification() {
 
 
 function showNotification(notification) {
-    $("#notifications").append("<tr><td>" + notification + "</td></tr>");
+    console.log("setting notification")
+    $("#notifications").append("<tr><td>" + notification.message + "</td></tr>");
 }
 
 $(function () {
@@ -66,14 +67,3 @@ $(function () {
     $( "#send" ).click(() => sendNotification());
 });
 
-
-// curl -X POST http://localhost:8080/api/events \
-//      -H "Content-Type: application/json" \
-//      -d '{
-//          "id": 1,
-//          "type": "meeting",
-//          "responsible": "bryan",
-//          "date": "2024-11-20",
-//          "time": "12:30:00",
-//          "location": "New York, Conference Hall A"
-//      }'
