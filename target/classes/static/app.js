@@ -1,12 +1,14 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/websocket'
+    brokerURL: 'ws://localhost:8081/websocket'
 });
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/notifications', ({body:notification}) => {
-        showNotification(notification);
+
+        console.log(notification)
+        //showNotification(notification);
     });
 };
 
@@ -44,9 +46,14 @@ function disconnect() {
 function sendNotification() {
     stompClient.publish({
         destination: "/app/notify",
-        body: $("#notification").val()
+        body: JSON.stringify({
+            type: "alert",
+            message: $("#notification").val(),
+            timestamp: new Date().toISOString() 
+        })
     });
 }
+
 
 function showNotification(notification) {
     $("#notifications").append("<tr><td>" + notification + "</td></tr>");
@@ -58,3 +65,15 @@ $(function () {
     $( "#disconnect" ).click(() => disconnect());
     $( "#send" ).click(() => sendNotification());
 });
+
+
+// curl -X POST http://localhost:8080/api/events \
+//      -H "Content-Type: application/json" \
+//      -d '{
+//          "id": 1,
+//          "type": "meeting",
+//          "responsible": "bryan",
+//          "date": "2024-11-20",
+//          "time": "12:30:00",
+//          "location": "New York, Conference Hall A"
+//      }'
