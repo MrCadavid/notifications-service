@@ -56,7 +56,6 @@ function sendNotification() {
 
 
 function showNotification(notification) {
-    console.log("setting notification")
     $("#notifications").append("<tr><td>" + notification.message + "</td></tr>");
 }
 
