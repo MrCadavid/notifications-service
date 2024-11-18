@@ -23,15 +23,18 @@ public class NotificationService {
                 null,
                 notificationDTO.getType(),
                 notificationDTO.getMessage(),
-                notificationDTO.getTimestamp()
+                notificationDTO.getTimestamp(),
+                notificationDTO.getEventId()
         );
         Notification savedNotification = notificationRepository.save(notification);
 
+        // Devolver el DTO con el ID del evento
         return new NotificationDTO(
                 savedNotification.getId(),
                 savedNotification.getType(),
                 savedNotification.getMessage(),
-                savedNotification.getTimestamp()
+                savedNotification.getTimestamp(),
+                savedNotification.getEventId() 
         );
     }
 
@@ -42,13 +45,15 @@ public class NotificationService {
             notification.setType(notificationDTO.getType());
             notification.setMessage(notificationDTO.getMessage());
             notification.setTimestamp(notificationDTO.getTimestamp());
+            notification.setEventId(notificationDTO.getEventId());
             Notification updatedNotification = notificationRepository.save(notification);
 
             return new NotificationDTO(
                     updatedNotification.getId(),
                     updatedNotification.getType(),
                     updatedNotification.getMessage(),
-                    updatedNotification.getTimestamp()
+                    updatedNotification.getTimestamp(),
+                    updatedNotification.getEventId() 
             );
         }
         return null;
@@ -68,7 +73,8 @@ public class NotificationService {
                 notification.getId(),
                 notification.getType(),
                 notification.getMessage(),
-                notification.getTimestamp()
+                notification.getTimestamp(),
+                notification.getEventId()
         )).toList();
     }
 
@@ -78,7 +84,8 @@ public class NotificationService {
                 notification.getId(),
                 notification.getType(),
                 notification.getMessage(),
-                notification.getTimestamp()
+                notification.getTimestamp(),
+                notification.getEventId() 
         )).orElse(null);
     }
 }
