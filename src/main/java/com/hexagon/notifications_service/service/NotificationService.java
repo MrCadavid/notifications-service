@@ -28,7 +28,7 @@ public class NotificationService {
         );
         Notification savedNotification = notificationRepository.save(notification);
 
-        // Devolver el DTO con el ID del evento
+    
         return new NotificationDTO(
                 savedNotification.getId(),
                 savedNotification.getType(),
@@ -88,4 +88,17 @@ public class NotificationService {
                 notification.getEventId() 
         )).orElse(null);
     }
+
+    public List<NotificationDTO> getNotificationsByEventId(Long eventId) {
+    return notificationRepository.findByEventId(eventId).stream()
+            .map(notification -> new NotificationDTO(
+                    notification.getId(),
+                    notification.getType(),
+                    notification.getMessage(),
+                    notification.getTimestamp(),
+                    notification.getEventId()
+            ))
+            .toList();
+}
+
 }

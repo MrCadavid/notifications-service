@@ -56,4 +56,16 @@ public class NotificationController {
         List<NotificationDTO> notifications = notificationService.getAllNotifications();  
         return new ResponseEntity<>(notifications, HttpStatus.OK); 
     }
+
+    // Endpoint to get notifications by event ID
+@GetMapping("/event/{eventId}")
+public ResponseEntity<List<NotificationDTO>> getNotificationsByEventId(@PathVariable Long eventId) {
+    List<NotificationDTO> notifications = notificationService.getNotificationsByEventId(eventId);
+    if (!notifications.isEmpty()) {
+        return new ResponseEntity<>(notifications, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+}
+
 }
