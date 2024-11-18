@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/notifications")
-public class NotificationController {  
+public class NotificationController {
 
     private final NotificationService notificationService;
 
@@ -24,14 +24,14 @@ public class NotificationController {
     // Endpoint to create a new notification
     @PostMapping
     public ResponseEntity<NotificationDTO> createNotification(@RequestBody NotificationDTO notificationDTO) {
-        NotificationDTO createdNotification = notificationService.createNotification(notificationDTO); 
+        NotificationDTO createdNotification = notificationService.createNotification(notificationDTO);
         return new ResponseEntity<>(createdNotification, HttpStatus.CREATED);
     }
 
     // Endpoint to update an existing notification
     @PutMapping("/{id}")
-    public ResponseEntity<NotificationDTO> updateNotification(@PathVariable Long id, @RequestBody NotificationDTO notificationDTO) { 
-        NotificationDTO updatedNotification = notificationService.updateNotification(id, notificationDTO); 
+    public ResponseEntity<NotificationDTO> updateNotification(@PathVariable Long id, @RequestBody NotificationDTO notificationDTO) {
+        NotificationDTO updatedNotification = notificationService.updateNotification(id, notificationDTO);
         if (updatedNotification != null) {
             return new ResponseEntity<>(updatedNotification, HttpStatus.OK);
         } else {
@@ -41,8 +41,8 @@ public class NotificationController {
 
     // Endpoint to delete a notification
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNotification(@PathVariable Long id) { 
-        boolean isDeleted = notificationService.deleteNotification(id); 
+    public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
+        boolean isDeleted = notificationService.deleteNotification(id);
         if (isDeleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -52,20 +52,19 @@ public class NotificationController {
 
     // Endpoint to get the list of notifications
     @GetMapping
-    public ResponseEntity<List<NotificationDTO>> getAllNotifications() {  
-        List<NotificationDTO> notifications = notificationService.getAllNotifications();  
-        return new ResponseEntity<>(notifications, HttpStatus.OK); 
+    public ResponseEntity<List<NotificationDTO>> getAllNotifications() {
+        List<NotificationDTO> notifications = notificationService.getAllNotifications();
+        return new ResponseEntity<>(notifications, HttpStatus.OK);
     }
 
     // Endpoint to get notifications by event ID
-@GetMapping("/event/{eventId}")
-public ResponseEntity<List<NotificationDTO>> getNotificationsByEventId(@PathVariable Long eventId) {
-    List<NotificationDTO> notifications = notificationService.getNotificationsByEventId(eventId);
-    if (!notifications.isEmpty()) {
-        return new ResponseEntity<>(notifications, HttpStatus.OK);
-    } else {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<List<NotificationDTO>> getNotificationsByEventId(@PathVariable Long eventId) {
+        List<NotificationDTO> notifications = notificationService.getNotificationsByEventId(eventId);
+        if (!notifications.isEmpty()) {
+            return new ResponseEntity<>(notifications, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-}
-
 }
