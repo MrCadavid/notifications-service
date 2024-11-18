@@ -1,5 +1,9 @@
-com/example/messagingstompwebsocket/consumer/RabbitMQJsonConsumer.class
-com/example/messagingstompwebsocket/NotificationApplication.class
-com/example/messagingstompwebsocket/WebSocketConfig.class
-com/example/messagingstompwebsocket/NotificationController.class
-com/example/messagingstompwebsocket/dto/NotificationDTO.class
+com/hexagon/notifications_service/WebSocketConfig.class
+com/hexagon/notifications_service/entity/Notification.class
+com/hexagon/notifications_service/NotificationApplication.class
+com/hexagon/notifications_service/dto/NotificationDTO.class
+com/hexagon/notifications_service/consumer/RabbitMQJsonConsumer.class
+com/hexagon/notifications_service/controller/NotificationController.class
+com/hexagon/notifications_service/repository/NotificationRepository.class
+com/hexagon/notifications_service/WebSocketController.class
+com/hexagon/notifications_service/service/NotificationService.class
