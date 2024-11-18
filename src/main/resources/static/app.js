@@ -8,7 +8,7 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/topic/notifications', ({body:notification}) => {
 
         console.log(notification)
-        showNotification(notification);
+        showNotification(JSON.parse(notification));
     });
 };
 
