@@ -21,20 +21,17 @@ public class NotificationService {
     public NotificationDTO createNotification(NotificationDTO notificationDTO) {
         Notification notification = new Notification(
                 null,
-                notificationDTO.getType(),
+                notificationDTO.getEventId(),
                 notificationDTO.getMessage(),
-                notificationDTO.getTimestamp(),
-                notificationDTO.getEventId()
+                notificationDTO.getSentAt()
         );
         Notification savedNotification = notificationRepository.save(notification);
 
-    
         return new NotificationDTO(
                 savedNotification.getId(),
-                savedNotification.getType(),
+                savedNotification.getEventId(),
                 savedNotification.getMessage(),
-                savedNotification.getTimestamp(),
-                savedNotification.getEventId() 
+                savedNotification.getSentAt()
         );
     }
 
@@ -42,18 +39,16 @@ public class NotificationService {
         Optional<Notification> notificationOptional = notificationRepository.findById(id);
         if (notificationOptional.isPresent()) {
             Notification notification = notificationOptional.get();
-            notification.setType(notificationDTO.getType());
-            notification.setMessage(notificationDTO.getMessage());
-            notification.setTimestamp(notificationDTO.getTimestamp());
             notification.setEventId(notificationDTO.getEventId());
+            notification.setMessage(notificationDTO.getMessage());
+            notification.setSentAt(notificationDTO.getSentAt());
             Notification updatedNotification = notificationRepository.save(notification);
 
             return new NotificationDTO(
                     updatedNotification.getId(),
-                    updatedNotification.getType(),
+                    updatedNotification.getEventId(),
                     updatedNotification.getMessage(),
-                    updatedNotification.getTimestamp(),
-                    updatedNotification.getEventId() 
+                    updatedNotification.getSentAt()
             );
         }
         return null;
@@ -71,10 +66,9 @@ public class NotificationService {
         List<Notification> notifications = notificationRepository.findAll();
         return notifications.stream().map(notification -> new NotificationDTO(
                 notification.getId(),
-                notification.getType(),
+                notification.getEventId(),
                 notification.getMessage(),
-                notification.getTimestamp(),
-                notification.getEventId()
+                notification.getSentAt()
         )).toList();
     }
 
@@ -82,23 +76,20 @@ public class NotificationService {
         Optional<Notification> notificationOptional = notificationRepository.findById(id);
         return notificationOptional.map(notification -> new NotificationDTO(
                 notification.getId(),
-                notification.getType(),
+                notification.getEventId(),
                 notification.getMessage(),
-                notification.getTimestamp(),
-                notification.getEventId() 
+                notification.getSentAt()
         )).orElse(null);
     }
 
     public List<NotificationDTO> getNotificationsByEventId(Long eventId) {
-    return notificationRepository.findByEventId(eventId).stream()
-            .map(notification -> new NotificationDTO(
-                    notification.getId(),
-                    notification.getType(),
-                    notification.getMessage(),
-                    notification.getTimestamp(),
-                    notification.getEventId()
-            ))
-            .toList();
-}
-
+        return notificationRepository.findByEventId(eventId).stream()
+                .map(notification -> new NotificationDTO(
+                        notification.getId(),
+                        notification.getEventId(),
+                        notification.getMessage(),
+                        notification.getSentAt()
+                ))
+                .toList();
+    }
 }

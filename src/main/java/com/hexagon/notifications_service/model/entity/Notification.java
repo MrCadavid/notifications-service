@@ -19,15 +19,12 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String type;
+    @Column(name = "event_id", nullable = false)
+    private Long eventId;
 
     @Column(nullable = false)
     private String message;
 
-    @Column(nullable = false)
-    private LocalDateTime timestamp;
-
-    @Column(name = "event_id", nullable = false)
-    private Long eventId; 
+    @Column(name = "sent_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime sentAt; 
 }

@@ -14,19 +14,17 @@ import lombok.Setter;
 public class NotificationDTO implements Serializable {
 
     private Long id; 
-    private String type;
+    private Long eventId;
     private String message;
-    private LocalDateTime timestamp;
-    private Long eventId; 
+    private LocalDateTime sentAt; 
 
     @Override
     public String toString() {
         return "NotificationDTO{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
-                ", message='" + message + '\'' +
-                ", timestamp=" + timestamp +
                 ", eventId=" + eventId +
+                ", message='" + message + '\'' +
+                ", sentAt=" + sentAt +
                 '}';
     }
 }
