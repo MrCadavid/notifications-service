@@ -19,16 +19,12 @@ public class RabbitMQJsonConsumer {
 
     @RabbitListener(queues = "notifications")
     public void receiveNotification(String notification) {
-        try {
-            // convert message string to dto 
-            NotificationDTO notificationDTO = objectMapper.readValue(notification, NotificationDTO.class);
-            
-            // send notification to all suscriptors
-            messagingTemplate.convertAndSend("/topic/notifications", notificationDTO);
-
-            System.out.println("send notification " + notificationDTO);
-        } catch (Exception e) {
-            System.err.println("error process notification" + e.getMessage());
-        }
+    try {
+        NotificationDTO notificationDTO = objectMapper.readValue(notification, NotificationDTO.class);
+        messagingTemplate.convertAndSend("/topic/notifications", notificationDTO);
+        System.out.println("Notification sent: " + notificationDTO);
+    } catch (Exception e) {
+        System.err.println("Error processing notification: " + e.getMessage());
     }
+}
 }
