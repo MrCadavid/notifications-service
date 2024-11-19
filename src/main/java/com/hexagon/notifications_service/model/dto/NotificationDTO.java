@@ -13,10 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class NotificationDTO implements Serializable {
 
-    private Long id; 
-    private Long eventId;
+    private Long id;
     private String message;
-    private LocalDateTime sentAt; 
+    private Long eventId;
+    private LocalDateTime sentAt;
 
     @Override
     public String toString() {

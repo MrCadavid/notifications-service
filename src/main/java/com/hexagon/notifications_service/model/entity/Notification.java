@@ -1,5 +1,6 @@
 package com.hexagon.notifications_service.entity;
 
+import com.hexagon.notifications_service.entity.Event;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -19,12 +20,17 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "event_id", nullable = false)
-    private Long eventId;
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
 
     @Column(nullable = false)
     private String message;
 
     @Column(name = "sent_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime sentAt; 
+    private LocalDateTime sentAt;
+
+    public Long getEventId() {
+        return this.event.getId();
+    }
 }
