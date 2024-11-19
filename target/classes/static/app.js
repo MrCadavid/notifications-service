@@ -1,5 +1,5 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://notifications-service-fq4c.onrender.com/websocket'
+    brokerURL: 'ws://localhost:8082/websocket'
 });
 
 stompClient.onConnect = (frame) => {
