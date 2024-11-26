@@ -1,6 +1,7 @@
 #remove files compilation
 HELP.md
 target/
+bin/
 
 ### STS ###
 .apt_generated
